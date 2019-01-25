@@ -1,0 +1,12 @@
+# remove node_modules
+node_modules
+
+#remove dist folder
+/dist
+
+#remove environvent variables
+*.env
+*.env.example
+
+#remove log files
+*.log

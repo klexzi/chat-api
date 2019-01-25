@@ -1,0 +1,28 @@
+# CREATING A BUSINESS ACCOUNT
+   - Sign up form should send data containing both user information and the organization account information to the api
+   - Data should be validated for email uniqueness and data validation and sanitization
+   - data should save correctly including the codeNumber(for the user collection only) generated to be sent to the users email for verification to both the user collection and organization account collection and also the isverified should be false which is set by default
+   - in the process of saving the user information and organization information, the user ID (creator) should be set as the admin in the userCollection
+   - after the data is saved, a mail should be sent to the users email where email includes the code number set to await verification in another endpoint
+   - in the verification endpoint; codeNumber should be compared to the one saved in the users document, if true then update isVerified to true
+   - an endpoint should also be placed to reset password for the user incase he as forgotten password, this endpoint should send a resetCodeNumber to the mail for verification and saved to the database for verification
+# JOINING A BUSINESS CHANNEL
+   - email sent should be validated if it exist in the invites array of the organization document
+   -  if invite is true then check the email as a document registered
+      - if email doesn't exist or belong to any user document, then send a response to indicate to the client app that is a new user and should be registered
+      - if email does exist but belongs to an unverified user who hasnt verified that mail, then a response should be sent back to indicate the user is not new but email or account as not been verified
+      - if email exist and belong to a verified user, then send a response indicating the user can proceed to send a password and login
+   
+ENDPOINTS AND POLICIES
+   - Create organization endpoint: unauthenticated access is allowed
+   - request email verification code endpoint: only authenticated user with isVerified property of false can have access
+   - Verify Account endpoint: only authenticated user with isVerified property of false can have access
+   - reset password endpoint: only authenticated user with either isVerified true or false can access
+   - get users endpoint: only authenticated user with isVerified set to true and belongs to the organization
+   - get users messages endpoint: only authenticated user with isVerified set to true and belongs to the organization and is the recipient or sender of the message
+   - validate reset password code: only authenticated user with either isVerified true or false can access
+   - invite endpoint: only authenticated user with isVerified property set to true and isAdmin set to true and belongs to that organization
+   - creating group: only authenticated user with isVerified property set to true and isAdmin set to true and belongs to that organization
+   - update userRole of staff members logic: only authenticated user with isVerified property set to true and isAdmin set to true and belongs to that organization
+   - private messaging endpoint: only authenticated user with isVerified property set to true and validating that the user sending the message and the recipients belong to the same organization
+   - group messaging endpoint: only authenticated user with isVerified property set to true and validating that the user sending the message belongs to the organization group and also a member of the group

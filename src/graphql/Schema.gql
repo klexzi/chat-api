@@ -1,0 +1,71 @@
+type UserAuth {
+  userId: String!
+  organizationId: String!
+  token: String!
+}
+
+type Address {
+  street: String
+  city: String
+  state: String
+}
+
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+  isVerified: Boolean!
+  online: Boolean!
+  isAdmin: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  role: String
+  imageUrl: String
+  lastLogin: String
+  phone: String
+  organization: Organization
+}
+
+type Organization {
+  name: String!
+  address: Address
+  imageUrl: String
+  bannerUrl: String
+  invitedEmails: [String]!
+  createdAt: String!
+  updatedAt: String!
+  user: User!
+  groups: [Group]!
+  members: [User]!
+}
+
+type Group {
+  name: String!
+  avatar: String!
+  isDefault: Boolean!
+  organization: Organization!
+  participants: [User]!
+}
+
+input CreateOrganizationAccount {
+  name: String!
+  email: String!
+  password: String!
+  phone: String
+  organizationName: String!
+  address: String
+}
+
+type Query {
+  user: User!
+  users: [User]!
+}
+
+type Mutation {
+  createOrganizationAccount(data: CreateOrganizationAccount!): UserAuth!
+}
+
+type Schema {
+  query: Query
+  mutation: Mutation
+}

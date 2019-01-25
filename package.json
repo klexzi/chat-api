@@ -1,0 +1,45 @@
+{
+  "name": "klex-chat-api",
+  "version": "1.0.0",
+  "description": "Api for the Klex chat App",
+  "main": "src/index.js",
+  "author": "Kelechi Nwosu",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "babel src --out-dir dist --copy-files",
+    "dev": "nodemon src/index.js --exec babel-node",
+    "test": ""
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-spread": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.1",
+    "@sendgrid/mail": "^6.3.1",
+    "babel-plugin-import-graphql": "^2.6.2",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
+    "helmet": "^3.15.0",
+    "joi": "^14.3.1",
+    "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^4.13.18",
+    "socket.io": "^2.2.0",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.2.2",
+    "dotenv": "^6.2.0",
+    "errorhandler": "^1.5.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9"
+  }
+}
