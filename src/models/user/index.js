@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { mustBelongTo } from "../../helpers/model-relationship";
 import generateAuthToken from "./methods/genertate-token";
+import verifyAccount from "./methods/verify-account";
 
 const userSchema = new mongoose.Schema(
   {
@@ -46,6 +47,7 @@ userSchema.plugin(mustBelongTo, {
 });
 
 generateAuthToken(userSchema);
+verifyAccount(userSchema);
 
 const User = mongoose.model("User", userSchema);
 

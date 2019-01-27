@@ -6,8 +6,10 @@ import graphqlResolver from "./graphql/resolvers";
 import logger from "./utils/logger";
 import { PORT } from "./utils/secrets";
 import connectMongoDB from "./utils/database";
+import authenticate from "./middlewares/authenticate";
 
 const app = express();
+app.use(authenticate);
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -24,7 +26,7 @@ app.use(
       if (!err.originalError.handleError) {
         logger.error(err);
       }
-      return fullError
+      return fullError;
     }
   })
 );

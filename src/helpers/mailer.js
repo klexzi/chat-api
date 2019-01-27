@@ -15,9 +15,7 @@ const sendMail = async (to, subject, text, html = null) => {
 
   return sendgrid
     .send(mail, true)
-    .then(result => {
-      console.log(result);
-    })
+    .then(result => {})
     .catch(error => {
       logger.error(error);
       handleErrors(error, 500);

@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-import Organization from "../../models/organization";
-import validate from "../../helpers/validators/organization/create";
-import User from "../../models/user";
-import handleError from "../../helpers/handle-errors";
-import sanitizeString from "../../helpers/data-sanitizers/sanitize-string";
-import generateCode from "../../helpers/generate-code";
-import logger from "../../utils/logger";
-import hashPassword from "../../helpers/password-encryption/hash-password";
-import sendMail from "../../helpers/mailer";
+import Organization from "../../../models/organization";
+import validate from "../../../helpers/validators/organization/create";
+import User from "../../../models/user";
+import handleError from "../../../helpers/handle-errors";
+import sanitizeString from "../../../helpers/data-sanitizers/sanitize-string";
+import generateCode from "../../../helpers/generate-code";
+import logger from "../../../utils/logger";
+import hashPassword from "../../../helpers/password-encryption/hash-password";
+import sendMail from "../../../helpers/mailer";
 
 const createOrganizationAccount = async ({ data }, req) => {
   const { error } = validate(data);

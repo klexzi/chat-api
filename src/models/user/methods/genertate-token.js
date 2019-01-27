@@ -4,10 +4,9 @@ import logger from "../../../utils/logger";
 import { WORKCHAT_JWT_KEY } from "../../../utils/secrets";
 
 const generateAuthToken = Schema => {
-  Schema.methods.generateAuthToken = function(Schema) {
+  Schema.methods.generateAuthToken = function() {
     let userAuth = {
-      userId: this._id,
-      organizationId: this.organization
+      userId: this._id
     };
     const token = jwt.sign(userAuth, WORKCHAT_JWT_KEY, { expiresIn: "5days" });
     logger.debug(token);
