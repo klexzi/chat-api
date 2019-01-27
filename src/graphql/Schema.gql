@@ -72,8 +72,9 @@ type Query {
 type Mutation {
   createOrganizationAccount(data: CreateOrganizationAccount!): UserAuth!
   verifyAccount(code: Int!): Boolean!
-  resendCode(type: resendCodeEnum!): Boolean!
-  resetPassword(code: Int!, password: String!, userId: ID!): Boolean!
+  resendCode(type: resendCodeEnum!, email: String): Boolean!
+  resetPassword(code: Int!, password: String!, email: String!): Boolean!
+  login(email: String!, password: String!): UserAuth!
 }
 
 type Schema {

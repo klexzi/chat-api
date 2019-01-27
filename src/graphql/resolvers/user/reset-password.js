@@ -7,8 +7,8 @@ const resetPassword = async args => {
   if (error) {
     return handleError(error.details[0].message, 400);
   }
-  const { code, password, userId } = args;
-  const user = await User.findOne({ _id: userId });
+  const { code, password, email } = args;
+  const user = await User.findOne({ email });
   if (!user) {
     return handleError("No user found", 404);
   }

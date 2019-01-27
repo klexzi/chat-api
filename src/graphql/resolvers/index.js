@@ -3,6 +3,7 @@ import createOrganizationAccount from "./organization/create-organization";
 import verifyAccount from "./user/verify-account";
 import resendCode from "./user/resend-code";
 import resetPassword from "./user/reset-password";
+import login from "./user/login";
 const resolvers = {
   async users() {
     return await getUsers();
@@ -18,6 +19,9 @@ const resolvers = {
   },
   async resetPassword(args, req) {
     return await resetPassword(args);
+  },
+  async login(args, req) {
+    return await login(args);
   }
 };
 

@@ -1,10 +1,7 @@
 import Joi from "joi";
 
-const validate = password => {
+const validate = data => {
   const schema = {
-    code: Joi.number()
-      .integer()
-      .required(),
     email: Joi.string()
       .email()
       .required(),
@@ -13,7 +10,7 @@ const validate = password => {
       .required()
   };
 
-  return Joi.validate(password, schema);
+  return Joi.validate(data, schema);
 };
 
 export { validate as default };
