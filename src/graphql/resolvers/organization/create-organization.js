@@ -20,7 +20,7 @@ const createOrganizationAccount = async ({ data }, req) => {
   if (emailExist) {
     return handleError("email already exist in the database", 400);
   }
-  let codeNumber = generateCode();
+  let verificationCode = generateCode();
   // extract data to User and Organization
   const userId = mongoose.Types.ObjectId();
   const organizationId = mongoose.Types.ObjectId();
@@ -31,7 +31,7 @@ const createOrganizationAccount = async ({ data }, req) => {
     email: data.email,
     password,
     isAdmin: true,
-    codeNumber,
+    verificationCode,
     organization: organizationId
   };
   if (data.phone) {
@@ -62,7 +62,7 @@ const createOrganizationAccount = async ({ data }, req) => {
       const to = [user.email];
       const subject = "Welcome to WorkChat";
       const text = `Welcome to workchat, the best platform where you can easily communicate with your colleague and staffs \n
-        but to enjoy the full features of our platform you have to verify your account with this code number ${codeNumber}. \n \n \n
+        but to enjoy the full features of our platform you have to verify your account with this code number ${verificationCode}. \n \n \n
         Thanks and welcome to the workchat family
         `;
       sendMail(to, subject, text);

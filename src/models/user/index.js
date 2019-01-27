@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import { mustBelongTo } from "../../helpers/model-relationship";
 import generateAuthToken from "./methods/genertate-token";
 import verifyAccount from "./methods/verify-account";
+import createVerificationCode from "./methods/create-verification-code";
+import createResetCode from "./methods/create-reset-code";
+import resetPassword from "./methods/reset-password";
 
 const userSchema = new mongoose.Schema(
   {
@@ -28,7 +31,8 @@ const userSchema = new mongoose.Schema(
     },
     role: String,
     imageUrl: String,
-    codeNumber: Number,
+    verificationCode: Number,
+    resetCode: Number,
     lastLogin: Date,
     lastSeen: Date,
     online: {
@@ -48,6 +52,9 @@ userSchema.plugin(mustBelongTo, {
 
 generateAuthToken(userSchema);
 verifyAccount(userSchema);
+createVerificationCode(userSchema);
+createResetCode(userSchema);
+resetPassword(userSchema);
 
 const User = mongoose.model("User", userSchema);
 

@@ -2,10 +2,10 @@ import logger from "../../../utils/logger";
 
 const verifyAccount = async Schema => {
   Schema.methods.verifyAccount = function(code) {
-    if (this.codeNumber === code) {
+    if (this.verificationCode === code) {
       this.isVerified = true;
-      this.codeNumber = null;
-      this.save()
+      this.verificationCode = null;
+      return this.save()
         .then(() => {
           return true;
         })
@@ -13,7 +13,6 @@ const verifyAccount = async Schema => {
           logger.error(error);
           return false;
         });
-      return true;
     }
     return false;
   };

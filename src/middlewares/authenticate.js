@@ -4,7 +4,7 @@ import User from "../models/user";
 import { WORKCHAT_JWT_KEY } from "../utils/secrets";
 import handleErrors from "../helpers/handle-errors";
 
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
   if (!req.headers["authorization"]) {
     return next();
   }
@@ -21,17 +21,17 @@ const authenticate = (req, res, next) => {
     req.isAuthenticated = false;
     return next();
   }
-  User.findOne({ _id: user.userId })
-    .select("-password ")
-    .then(user => {
-      req.isAuthenticated = true;
-      req.User = user;
-      return next();
-    })
-    .catch(reason => {
-      req.isAuthenticated = false;
-      return next();
-    });
+  const authenticatedUser = await User.findOne({ _id: user.userId }).select(
+    "-password"
+  );
+  if (!authenticatedUser) {
+    req.isAuthenticated = false;
+    return next();
+  } else {
+    req.isAuthenticated = true;
+    req.User = authenticatedUser;
+    return next();
+  }
 };
 
 export { authenticate as default };
