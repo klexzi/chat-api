@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 import Organization from "../../../models/organization";
-import validate from "../../../helpers/validators/organization/create";
 import User from "../../../models/user";
+import Group from "../../../models/group";
+import validate from "../../../helpers/validators/organization/create";
 import handleError from "../../../helpers/handle-errors";
 import sanitizeString from "../../../helpers/data-sanitizers/sanitize-string";
 import generateCode from "../../../helpers/generate-code";
-import logger from "../../../utils/logger";
 import hashPassword from "../../../helpers/password-encryption/hash-password";
 import sendMail from "../../../helpers/mailer";
 
@@ -44,16 +44,26 @@ const createOrganizationAccount = async ({ data }, req) => {
     user: userId
   };
 
+  let groupData = {
+    name: "members",
+    isDefault: true,
+    organization: organizationId
+  };
   if (data.address) {
     organizationData = data.address;
   }
 
   const user = new User(userData);
   const organization = new Organization(organizationData);
+  const group = new Group(groupData);
+
   return user
     .save()
     .then(() => {
       return organization.save();
+    })
+    .then(() => {
+      return group.save();
     })
     .then(() => {
       // generate token to send to the client
