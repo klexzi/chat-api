@@ -21,9 +21,7 @@ const authenticate = async (req, res, next) => {
     req.isAuthenticated = false;
     return next();
   }
-  const authenticatedUser = await User.findOne({ _id: user.userId }).select(
-    "-password"
-  );
+  const authenticatedUser = await User.findOne({ _id: user.userId });
   if (!authenticatedUser) {
     req.isAuthenticated = false;
     return next();

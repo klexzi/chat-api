@@ -75,6 +75,7 @@ type Mutation {
   resendCode(type: resendCodeEnum!, email: String): Boolean!
   resetPassword(code: Int!, password: String!, email: String!): Boolean!
   login(email: String!, password: String!): UserAuth!
+  changePassword(oldPassword: String!, newPassword: String!): Boolean!
 }
 
 type Schema {

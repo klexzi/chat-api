@@ -3,6 +3,7 @@ import createOrganizationAccount from "./organization/create-organization";
 import verifyAccount from "./user/verify-account";
 import resendCode from "./user/resend-code";
 import resetPassword from "./user/reset-password";
+import changePassword from "./user/change-password";
 import login from "./user/login";
 const resolvers = {
   async users() {
@@ -22,6 +23,9 @@ const resolvers = {
   },
   async login(args, req) {
     return await login(args);
+  },
+  async changePassword(args, req) {
+    return await changePassword(args, req);
   }
 };
 
