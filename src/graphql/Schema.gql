@@ -76,6 +76,7 @@ type Mutation {
   resetPassword(code: Int!, password: String!, email: String!): Boolean!
   login(email: String!, password: String!): UserAuth!
   changePassword(oldPassword: String!, newPassword: String!): Boolean!
+  invite(email: String!): Boolean!
 }
 
 type Schema {

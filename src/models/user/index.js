@@ -6,6 +6,7 @@ import createVerificationCode from "./methods/create-verification-code";
 import createResetCode from "./methods/create-reset-code";
 import resetPassword from "./methods/reset-password";
 import changePassword from "./methods/change-password";
+import invite from "./methods/invite";
 
 const userSchema = new mongoose.Schema(
   {
@@ -57,6 +58,7 @@ createVerificationCode(userSchema);
 createResetCode(userSchema);
 resetPassword(userSchema);
 changePassword(userSchema);
+invite(userSchema);
 
 const User = mongoose.model("User", userSchema);
 

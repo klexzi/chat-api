@@ -5,6 +5,8 @@ import resendCode from "./user/resend-code";
 import resetPassword from "./user/reset-password";
 import changePassword from "./user/change-password";
 import login from "./user/login";
+import invite from "./user/invite";
+
 const resolvers = {
   async users() {
     return await getUsers();
@@ -26,6 +28,9 @@ const resolvers = {
   },
   async changePassword(args, req) {
     return await changePassword(args, req);
+  },
+  async invite(args, req) {
+    return await invite(args, req);
   }
 };
 
