@@ -51,7 +51,10 @@ const createUserAccount = async ({ data }, req) => {
       .then(() => {
         return Organization.updateOne(
           { _id: data.organization },
-          { $addToSet: { members: user._id } }
+          {
+            $addToSet: { members: user._id },
+            $pull: { invitedEmails: data.email }
+          }
         );
       })
       .then(() => {
