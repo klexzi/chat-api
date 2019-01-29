@@ -9,6 +9,9 @@ import login from "./user/login";
 import invite from "./user/invite";
 import findOrganization from "./organization/find-organization";
 import verifyInvitation from "./user/verify-invitation";
+import createGroup from "./group/create-group";
+import inviteToGroup from "./group/invite-to-group";
+import removeFromGroup from "./group/remove-from-group";
 
 const resolvers = {
   async users() {
@@ -43,6 +46,15 @@ const resolvers = {
   },
   async verifyInvitation(args, req) {
     return await verifyInvitation(args, req);
+  },
+  async createGroup(args, req) {
+    return await createGroup(args, req);
+  },
+  async inviteToGroup(args, req) {
+    return await inviteToGroup(args, req);
+  },
+  async removeFromGroup(args, req) {
+    return await removeFromGroup(args, req);
   }
 };
 

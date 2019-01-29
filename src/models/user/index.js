@@ -7,6 +7,9 @@ import createResetCode from "./methods/create-reset-code";
 import resetPassword from "./methods/reset-password";
 import changePassword from "./methods/change-password";
 import invite from "./methods/invite";
+import createGroup from "./methods/create-group";
+import inviteToGroup from "./methods/invite-to-group";
+import removeFromGroup from "./methods/remove-from-group";
 
 const userSchema = new mongoose.Schema(
   {
@@ -59,6 +62,9 @@ createResetCode(userSchema);
 resetPassword(userSchema);
 changePassword(userSchema);
 invite(userSchema);
+createGroup(userSchema);
+inviteToGroup(userSchema);
+removeFromGroup(userSchema);
 
 const User = mongoose.model("User", userSchema);
 

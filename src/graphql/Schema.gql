@@ -50,7 +50,7 @@ type Organization {
 
 type Group {
   name: String!
-  avatar: String!
+  avatar: String
   isDefault: Boolean!
   organization: Organization!
   participants: [User]!
@@ -78,10 +78,20 @@ input CreateUserAccount {
   phone: String
 }
 
+input CreateGroup {
+  name: String!
+  participants: [ID]!
+}
+
 input findOrganization {
   email: String!
 }
 
+input GroupInvitation {
+  organization: ID!
+  group: ID!
+  participants: [ID!]!
+}
 type Query {
   user: User!
   users: [User]!
@@ -98,6 +108,9 @@ type Mutation {
   changePassword(oldPassword: String!, newPassword: String!): Boolean!
   invite(email: String!): Boolean!
   verifyInvitation(email: String!, organization: ID!): verifyInvitation!
+  createGroup(data: CreateGroup!): Group!
+  inviteToGroup(data: GroupInvitation!): Boolean!
+  removeFromGroup(data: GroupInvitation!): Boolean!
 }
 
 type Schema {
