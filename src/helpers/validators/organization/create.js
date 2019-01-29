@@ -25,6 +25,9 @@ const validate = dataObject => {
       .min(8)
       .required(),
     phone: Joi.string().alphanum(),
+    organizationEmail: Joi.string()
+      .email()
+      .required(),
     organizationName: Joi.string()
       .trim()
       .required()

@@ -18,7 +18,13 @@ const createOrganizationAccount = async ({ data }, req) => {
   sanitizeString(data);
   const emailExist = await User.findOne({ email: data.email });
   if (emailExist) {
-    return handleError("email already exist in the database", 400);
+    return handleError("user email already exist", 400);
+  }
+  const organizationEmailExist = await Organization.findOne({
+    email: data.organizationEmail
+  });
+  if (organizationEmailExist) {
+    return handleError("organization email already exist", 400);
   }
   let verificationCode = generateCode();
   // extract data to User and Organization
@@ -41,6 +47,7 @@ const createOrganizationAccount = async ({ data }, req) => {
   let organizationData = {
     _id: organizationId,
     name: data.organizationName,
+    email: data.organizationEmail,
     user: userId
   };
 

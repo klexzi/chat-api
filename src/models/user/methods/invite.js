@@ -29,7 +29,7 @@ const invite = async Schema => {
       } else {
         return Organization.findOneAndUpdate(
           { _id: String(organization._id) },
-          { $push: { invitedEmails: email } }
+          { $addToSet: { invitedEmails: email } }
         )
           .then(() => {
             sendMail(

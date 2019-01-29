@@ -6,6 +6,8 @@ import resetPassword from "./user/reset-password";
 import changePassword from "./user/change-password";
 import login from "./user/login";
 import invite from "./user/invite";
+import findOrganization from "./organization/find-organization";
+import verifyInvitation from "./user/verify-invitation";
 
 const resolvers = {
   async users() {
@@ -31,6 +33,12 @@ const resolvers = {
   },
   async invite(args, req) {
     return await invite(args, req);
+  },
+  async findOrganization(args, req) {
+    return await findOrganization(args, req);
+  },
+  async verifyInvitation(args, req) {
+    return await verifyInvitation(args, req);
   }
 };
 

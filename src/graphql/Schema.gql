@@ -36,6 +36,7 @@ type User {
 
 type Organization {
   name: String!
+  email: String!
   address: Address
   imageUrl: String
   bannerUrl: String
@@ -55,18 +56,28 @@ type Group {
   participants: [User]!
 }
 
+type verifyInvitation {
+  newUser: Boolean!
+  isVerified: Boolean!
+}
+
 input CreateOrganizationAccount {
   name: String!
   email: String!
   password: String!
   phone: String
   organizationName: String!
+  organizationEmail: String!
   address: String
+}
+input findOrganization {
+  email: String!
 }
 
 type Query {
   user: User!
   users: [User]!
+  findOrganization(where: findOrganization!): ID!
 }
 
 type Mutation {
@@ -77,6 +88,7 @@ type Mutation {
   login(email: String!, password: String!): UserAuth!
   changePassword(oldPassword: String!, newPassword: String!): Boolean!
   invite(email: String!): Boolean!
+  verifyInvitation(email: String!, organization: ID!): verifyInvitation!
 }
 
 type Schema {
