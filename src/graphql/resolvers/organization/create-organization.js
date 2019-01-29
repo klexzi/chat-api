@@ -30,6 +30,7 @@ const createOrganizationAccount = async ({ data }, req) => {
   // extract data to User and Organization
   const userId = mongoose.Types.ObjectId();
   const organizationId = mongoose.Types.ObjectId();
+  const groupId = mongoose.Types.ObjectId();
   const password = await hashPassword(data.password);
   let userData = {
     _id: userId,
@@ -48,13 +49,17 @@ const createOrganizationAccount = async ({ data }, req) => {
     _id: organizationId,
     name: data.organizationName,
     email: data.organizationEmail,
-    user: userId
+    user: userId,
+    groups: [groupId],
+    members: [userId]
   };
 
   let groupData = {
+    _id: groupId,
     name: "members",
     isDefault: true,
-    organization: organizationId
+    organization: organizationId,
+    participants: [userId]
   };
   if (data.address) {
     organizationData = data.address;

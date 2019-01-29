@@ -1,5 +1,6 @@
 import getUsers from "./user/get-users";
 import createOrganizationAccount from "./organization/create-organization";
+import createUserAccount from "./user/create-user";
 import verifyAccount from "./user/verify-account";
 import resendCode from "./user/resend-code";
 import resetPassword from "./user/reset-password";
@@ -15,6 +16,9 @@ const resolvers = {
   },
   async createOrganizationAccount(args) {
     return await createOrganizationAccount(args);
+  },
+  async createUserAccount(args) {
+    return await createUserAccount(args);
   },
   async verifyAccount(args, req) {
     return await verifyAccount(args, req);
