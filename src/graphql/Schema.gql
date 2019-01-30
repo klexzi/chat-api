@@ -3,6 +3,10 @@ enum resendCodeEnum {
   VERIFICATION
 }
 
+enum MessageType {
+  text
+}
+
 type generalOutput {
   success: Boolean!
   message: String!
@@ -60,6 +64,19 @@ type verifyInvitation {
   newUser: Boolean!
   isVerified: Boolean!
 }
+type MessageObject {
+  messageType: MessageType!
+  data: String!
+}
+type PrivateMessage {
+  _id: ID!
+  message: MessageObject!
+  status: String!
+  organization: ID!
+  recipient: ID!
+  sender: ID!
+  repliedMessage: ID
+}
 
 input CreateOrganizationAccount {
   name: String!
@@ -92,6 +109,17 @@ input GroupInvitation {
   group: ID!
   participants: [ID!]!
 }
+input MessageObjectInput {
+  messageType: MessageType!
+  data: String!
+}
+
+input PrivateMessageInput {
+  message: MessageObjectInput!
+  recipient: ID!
+  repliedMessage: ID
+}
+
 type Query {
   user: User!
   users: [User]!
@@ -111,6 +139,7 @@ type Mutation {
   createGroup(data: CreateGroup!): Group!
   inviteToGroup(data: GroupInvitation!): Boolean!
   removeFromGroup(data: GroupInvitation!): Boolean!
+  sendPrivateMessage(data: PrivateMessageInput!): PrivateMessage!
 }
 
 type Schema {

@@ -12,6 +12,7 @@ import verifyInvitation from "./user/verify-invitation";
 import createGroup from "./group/create-group";
 import inviteToGroup from "./group/invite-to-group";
 import removeFromGroup from "./group/remove-from-group";
+import sendMessage from "./private-message/send-message";
 
 const resolvers = {
   async users() {
@@ -55,6 +56,9 @@ const resolvers = {
   },
   async removeFromGroup(args, req) {
     return await removeFromGroup(args, req);
+  },
+  async sendPrivateMessage(args, req) {
+    return await sendMessage(args, req);
   }
 };
 

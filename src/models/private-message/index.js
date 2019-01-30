@@ -1,39 +1,52 @@
 import mongoose from "mongoose";
 import { mustBelongTo, belongsTo } from "../../helpers/model-relationship";
 
-const privateMessageSchema = new mongoose.Schema({
-   status: {
+const privateMessageSchema = new mongoose.Schema(
+  {
+    status: {
       type: String,
       enum: ["saved", "delivered", "read"],
-      default : "saved"
-   }
-}, {timestamps: true});
+      default: "saved"
+    },
+    message: {
+      messageType: {
+        type: String,
+        enum: ["text", "file"],
+        required: true
+      },
+      data: {
+        type: String,
+        required: true
+      }
+    }
+  },
+  { timestamps: true }
+);
 
 privateMessageSchema.plugin(mustBelongTo, {
-   ref: "Organization",
-   type: mongoose.Schema.Types.ObjectId,
-   name: "organization"
-})
-
-privateMessageSchema.plugin(mustBelongTo, {
-   ref: "User",
-   type: mongoose.Schema.Types.ObjectId,
-   name: "recipient"
+  ref: "Organization",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "organization"
 });
 
 privateMessageSchema.plugin(mustBelongTo, {
-   ref: "User",
-   type: mongoose.Schema.Types.ObjectId,
-   name: "sender"
+  ref: "User",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "recipient"
 });
 
+privateMessageSchema.plugin(mustBelongTo, {
+  ref: "User",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "sender"
+});
 
 privateMessageSchema.plugin(belongsTo, {
-   ref: "PrivateMessage",
-   type: mongoose.Schema.Types.ObjectId,
-   name: "replyingMessage"
+  ref: "PrivateMessage",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "repliedMessage"
 });
 
 const PrivateMessage = mongoose.model("PrivateMessage", privateMessageSchema);
 
-export {PrivateMessage as default}
+export { PrivateMessage as default };

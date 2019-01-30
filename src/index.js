@@ -1,5 +1,6 @@
 import express from "express";
 import graphqlHTTP from "express-graphql";
+const playground = require("graphql-playground-middleware-express").default;
 
 import graphqlSchema from "./graphql/Schema";
 import graphqlResolver from "./graphql/resolvers";
@@ -30,6 +31,8 @@ app.use(
     }
   })
 );
+
+app.get("/playground", playground({ endpoint: "/graphql" }));
 connectMongoDB().then(() => {
   app.listen(PORT, () => {
     logger.info(`server up at port ${PORT}`);
