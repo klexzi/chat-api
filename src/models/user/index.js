@@ -11,6 +11,7 @@ import createGroup from "./methods/create-group";
 import inviteToGroup from "./methods/invite-to-group";
 import removeFromGroup from "./methods/remove-from-group";
 import sendPrivateMessage from "./methods/send-private-message";
+import sendGroupMessage from "./methods/send-group-message";
 
 const userSchema = new mongoose.Schema(
   {
@@ -67,6 +68,7 @@ createGroup(userSchema);
 inviteToGroup(userSchema);
 removeFromGroup(userSchema);
 sendPrivateMessage(userSchema);
+sendGroupMessage(userSchema);
 
 const User = mongoose.model("User", userSchema);
 

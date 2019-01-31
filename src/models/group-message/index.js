@@ -1,33 +1,51 @@
 import mongoose from "mongoose";
+import { mustBelongTo, belongsTo } from "../../helpers/model-relationship";
 
-const groupMessageSchema = new mongoose.Schema({
-   status: {
+const groupMessageSchema = new mongoose.Schema(
+  {
+    status: {
       type: String,
       enum: ["saved", "delivered", "read"],
-      default : "saved"
-   }
-}, {timestamps: true});
+      default: "saved"
+    },
+    message: {
+      messageType: {
+        type: String,
+        enum: ["text", "file"],
+        required: true
+      },
+      data: {
+        type: String,
+        required: true
+      }
+    }
+  },
+  { timestamps: true }
+);
 
 groupMessageSchema.plugin(mustBelongTo, {
-   ref: "Organization",
-   type: mongoose.Schema.Types.ObjectId,
-   name: "organization"
-})
+  ref: "Organization",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "organization"
+});
+groupMessageSchema.plugin(mustBelongTo, {
+  ref: "Group",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "group"
+});
 
 groupMessageSchema.plugin(mustBelongTo, {
-   ref: "User",
-   type: mongoose.Schema.Types.ObjectId,
-   name: "recipient"
+  ref: "User",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "sender"
 });
 
-privateMessageSchema.plugin(belongsTo, {
-   ref: "PrivateMessage",
-   type: mongoose.Schema.Types.ObjectId,
-   name: "replyingMessage"
+groupMessageSchema.plugin(belongsTo, {
+  ref: "GroupMessage",
+  type: mongoose.Schema.Types.ObjectId,
+  name: "repliedMessage"
 });
 
+const GroupMessage = mongoose.model("GroupMessage", groupMessageSchema);
 
-const GroupMessage= mongoose.model("GroupMessage", groupMessageSchema);
-
-export {GroupMessage as default}
-
+export { GroupMessage as default };
