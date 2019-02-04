@@ -14,6 +14,7 @@ import inviteToGroup from "./group/invite-to-group";
 import removeFromGroup from "./group/remove-from-group";
 import sendMessage from "./private-message/send-message";
 import sendGroupMessage from "./group-message/send-message";
+import contacts from "./user/contacts";
 
 const resolvers = {
   async users() {
@@ -63,6 +64,9 @@ const resolvers = {
   },
   async sendGroupMessage(args, req) {
     return await sendGroupMessage(args, req);
+  },
+  async contacts(args, req) {
+    return await contacts(args, req);
   }
 };
 

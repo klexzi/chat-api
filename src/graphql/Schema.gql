@@ -138,6 +138,7 @@ input GroupMessageInput {
 type Query {
   user: User!
   users: [User]!
+  contacts: [User]!
   findOrganization(where: findOrganization!): ID!
 }
 
