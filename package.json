@@ -33,6 +33,7 @@
     "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^4.13.18",
+    "mongoose-paginate": "^5.0.3",
     "socket.io": "^2.2.0",
     "winston": "^3.1.0"
   },

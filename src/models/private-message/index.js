@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate";
 import { mustBelongTo, belongsTo } from "../../helpers/model-relationship";
 
 const privateMessageSchema = new mongoose.Schema(
@@ -47,6 +48,7 @@ privateMessageSchema.plugin(belongsTo, {
   name: "repliedMessage"
 });
 
+privateMessageSchema.plugin(mongoosePaginate);
 const PrivateMessage = mongoose.model("PrivateMessage", privateMessageSchema);
 
 export { PrivateMessage as default };

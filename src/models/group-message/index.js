@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate";
 import { mustBelongTo, belongsTo } from "../../helpers/model-relationship";
 
 const groupMessageSchema = new mongoose.Schema(
@@ -46,6 +47,7 @@ groupMessageSchema.plugin(belongsTo, {
   name: "repliedMessage"
 });
 
+groupMessageSchema.plugin(mongoosePaginate);
 const GroupMessage = mongoose.model("GroupMessage", groupMessageSchema);
 
 export { GroupMessage as default };

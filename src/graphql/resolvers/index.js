@@ -15,6 +15,8 @@ import removeFromGroup from "./group/remove-from-group";
 import sendMessage from "./private-message/send-message";
 import sendGroupMessage from "./group-message/send-message";
 import contacts from "./user/contacts";
+import privateMessageHistory from "./private-message/view-messages";
+import groupMessageHistory from "./group-message/view-messages";
 
 const resolvers = {
   async users() {
@@ -67,6 +69,12 @@ const resolvers = {
   },
   async contacts(args, req) {
     return await contacts(args, req);
+  },
+  async privateMessageHistory(args, req) {
+    return await privateMessageHistory(args, req);
+  },
+  async groupMessageHistory(args, req) {
+    return await groupMessageHistory(args, req);
   }
 };
 

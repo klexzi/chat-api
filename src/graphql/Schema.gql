@@ -77,6 +77,13 @@ type PrivateMessage {
   sender: ID!
   repliedMessage: ID
 }
+type PrivateMessageHistory {
+  docs: [PrivateMessage]!
+  total: Int!
+  limit: Int!
+  page: Int!
+  pages: Int!
+}
 type GroupMessage {
   _id: ID!
   message: MessageObject!
@@ -86,7 +93,13 @@ type GroupMessage {
   sender: ID!
   repliedMessage: ID
 }
-
+type GroupMessageHistory {
+  docs: [GroupMessage]!
+  total: Int!
+  limit: Int!
+  page: Int!
+  pages: Int!
+}
 input CreateOrganizationAccount {
   name: String!
   email: String!
@@ -134,12 +147,30 @@ input GroupMessageInput {
   group: ID!
   repliedMessage: ID
 }
-
+input PrivateMessageHistoryInput {
+  recipient: ID!
+}
+input GroupMessageHistoryInput {
+  group: ID!
+}
+input Pagination {
+  page: Int
+  limit: Int
+  q: String
+}
 type Query {
   user: User!
   users: [User]!
   contacts: [User]!
   findOrganization(where: findOrganization!): ID!
+  privateMessageHistory(
+    where: PrivateMessageHistoryInput!
+    paginate: Pagination!
+  ): PrivateMessageHistory!
+  groupMessageHistory(
+    where: GroupMessageHistoryInput!
+    paginate: Pagination!
+  ): GroupMessageHistory!
 }
 
 type Mutation {
